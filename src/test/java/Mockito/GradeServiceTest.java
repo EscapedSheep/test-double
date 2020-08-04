@@ -1,9 +1,16 @@
-package stub;
+package Mockito;
 
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import stub.GradeService;
+import stub.GradeSystem;
+
+import java.util.Arrays;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class GradeServiceTest {
     /* 需求描述：
@@ -15,8 +22,9 @@ public class GradeServiceTest {
 
     @BeforeEach
     void setUp() {
-        gradeSystem = new StubGradeSystem();
+        gradeSystem = mock(GradeSystem.class);
         gradeService = new GradeService(gradeSystem);
+        when(gradeSystem.gradesFor(1)).thenReturn(Arrays.asList(90.0,80.0,100.0));
     }
 
     @Test

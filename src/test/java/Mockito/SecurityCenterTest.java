@@ -1,9 +1,11 @@
-package mock;
+package Mockito;
 
-
+import mock.DoorPanel;
+import mock.SecurityCenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.mockito.Mockito.*;
 
 public class SecurityCenterTest {
     /* 需求描述：
@@ -11,18 +13,17 @@ public class SecurityCenterTest {
     * */
 
     private SecurityCenter securityCenter;
-    private MockDoorPanel doorPanel;
+    private DoorPanel doorPanel;
 
     @BeforeEach
     public void setUp() {
-        doorPanel = new MockDoorPanel();
+        doorPanel = mock(DoorPanel.class);
         securityCenter = new SecurityCenter(doorPanel);
     }
 
     @Test
     public void shouldVerifyDoorIsClosed() {
         securityCenter.switchOn();
-        assertTrue(doorPanel.verify());
-
+        verify(doorPanel,times(1)).close();
     }
 }
